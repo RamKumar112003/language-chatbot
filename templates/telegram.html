@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}Telegram Bot - Language Agnostic Translator{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold mb-3">
+            <i class="fab fa-telegram text-primary me-3"></i>
+            Telegram Bot
+        </h1>
+        <p class="lead text-muted mb-4">
+            Get instant translations directly in your Telegram chats. Perfect for multilingual conversations and channels.
+        </p>
+    </div>
+
+    <!-- Bot Information -->
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">
+                        <i class="fas fa-robot me-2"></i>Bot Features
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span class="fw-semibold">Real-time Translation</span>
+                            </div>
+                            <p class="text-muted small">Translate any message instantly to your preferred language</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span class="fw-semibold">Auto Language Detection</span>
+                            </div>
+                            <p class="text-muted small">Automatically detect the language of incoming messages</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span class="fw-semibold">20+ Languages</span>
+                            </div>
+                            <p class="text-muted small">Support for major world languages</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span class="fw-semibold">Channel Integration</span>
+                            </div>
+                            <p class="text-muted small">Works in both private chats and channels</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">
+                        <i class="fas fa-question-circle me-2"></i>How to Use
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="fw-semibold mb-3">Private Chat</h5>
+                            <ol class="list-group list-group-numbered">
+                                <li class="list-group-item border-0 px-0">Start a conversation with the bot</li>
+                                <li class="list-group-item border-0 px-0">Send any text message</li>
+                                <li class="list-group-item border-0 px-0">Bot will auto-translate to your preferred language</li>
+                                <li class="list-group-item border-0 px-0">Use commands for specific functions</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="fw-semibold mb-3">Channels</h5>
+                            <ol class="list-group list-group-numbered">
+                                <li class="list-group-item border-0 px-0">Add bot to your channel as admin</li>
+                                <li class="list-group-item border-0 px-0">Use /translate command for specific translations</li>
+                                <li class="list-group-item border-0 px-0">Use /detect to identify message language</li>
+                                <li class="list-group-item border-0 px-0">Enable auto-translation for the channel</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commands -->
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">
+                        <i class="fas fa-terminal me-2"></i>Bot Commands
+                    </h3>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Command</th>
+                                    <th>Description</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for command, description in commands.items() %}
+                                <tr>
+                                    <td><code>/{{ command }}</code></td>
+                                    <td>{{ description }}</td>
+                                    <td>
+                                        {% if command == 'translate' %}
+                                        <code>/translate Hello es</code>
+                                        {% elif command == 'detect' %}
+                                        <code>/detect Hola mundo</code>
+                                        {% elif command == 'set_lang' %}
+                                        <code>/set_lang es</code>
+                                        {% else %}
+                                        <code>/{{ command }}</code>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Supported Languages -->
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">
+                        <i class="fas fa-globe me-2"></i>Supported Languages
+                    </h3>
+                    <div class="row">
+                        {% for code, name in languages.items() %}
+                        <div class="col-md-3 col-sm-4 col-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-primary me-2">{{ code.upper() }}</span>
+                                <span class="small">{{ name }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Setup Instructions -->
+            <div class="card">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">
+                        <i class="fas fa-cog me-2"></i>Setup Instructions
+                    </h3>
+                    <div class="alert alert-info">
+                        <h5 class="alert-heading">
+                            <i class="fas fa-info-circle me-2"></i>Getting Started
+                        </h5>
+                        <ol class="mb-0">
+                            <li><strong>Get Bot Token:</strong> Message <a href="https://t.me/botfather" target="_blank">@BotFather</a> on Telegram</li>
+                            <li><strong>Create Bot:</strong> Use <code>/newbot</code> command and follow instructions</li>
+                            <li><strong>Configure:</strong> Add your bot token to the <code>.env</code> file</li>
+                            <li><strong>Run Bot:</strong> Execute <code>python telegram_bot.py</code> or <code>python run_bot.py</code></li>
+                            <li><strong>Start Chatting:</strong> Find your bot on Telegram and start translating!</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <h5 class="alert-heading">
+                            <i class="fas fa-exclamation-triangle me-2"></i>For Channels
+                        </h5>
+                        <ol class="mb-0">
+                            <li>Add your bot to the channel as an administrator</li>
+                            <li>Use <code>python channel_bot.py</code> for channel-specific features</li>
+                            <li>Get channel ID by forwarding a message to <a href="https://t.me/userinfobot" target="_blank">@userinfobot</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <div class="card-body text-center p-5">
+                    <h3 class="mb-3">
+                        <i class="fas fa-rocket me-2"></i>
+                        Ready to Get Started?
+                    </h3>
+                    <p class="lead mb-4">
+                        Set up your own language-agnostic Telegram bot and start breaking language barriers today!
+                    </p>
+                    <a href="{{ url_for('index') }}" class="btn btn-light btn-lg me-3">
+                        <i class="fas fa-globe me-2"></i>Try Web Version
+                    </a>
+                    <a href="https://t.me/botfather" target="_blank" class="btn btn-outline-light btn-lg">
+                        <i class="fab fa-telegram me-2"></i>Create Bot
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+
+{% block title %}Language Agnostic Translator - Break Language Barriers{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold mb-3">
+            <i class="fas fa-globe-americas text-primary me-3"></i>
+            Language Agnostic Translator
+        </h1>
+        <p class="lead text-muted mb-4">
+            Break language barriers with AI-powered translation. Translate text between 20+ languages instantly.
+        </p>
+    </div>
+
+    <!-- Translation Interface -->
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-body p-4">
+                    <form id="translationForm">
+                        <div class="row">
+                            <!-- Source Language Selection -->
+                            <div class="col-md-4 mb-3">
+                                <label for="sourceLang" class="form-label fw-semibold">
+                                    <i class="fas fa-language me-2"></i>From Language
+                                </label>
+                                <select class="form-select" id="sourceLang" name="source_lang">
+                                    <option value="">Auto-detect</option>
+                                    {% for code, name in languages.items() %}
+                                    <option value="{{ code }}">{{ name }} ({{ code.upper() }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <!-- Target Language Selection -->
+                            <div class="col-md-4 mb-3">
+                                <label for="targetLang" class="form-label fw-semibold">
+                                    <i class="fas fa-flag me-2"></i>To Language
+                                </label>
+                                <select class="form-select" id="targetLang" name="target_lang" required>
+                                    <option value="en">English (EN)</option>
+                                    {% for code, name in languages.items() %}
+                                    {% if code != 'en' %}
+                                    <option value="{{ code }}">{{ name }} ({{ code.upper() }})</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="col-md-4 mb-3 d-flex align-items-end">
+                                <button type="button" class="btn btn-outline-secondary me-2" id="swapBtn" title="Swap languages">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-info me-2" id="detectBtn" title="Detect language">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <button type="submit" class="btn btn-primary flex-grow-1">
+                                    <i class="fas fa-translate me-2"></i>Translate
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Text Input -->
+                        <div class="mb-3">
+                            <label for="inputText" class="form-label fw-semibold">
+                                <i class="fas fa-edit me-2"></i>Text to Translate
+                            </label>
+                            <textarea class="form-control" id="inputText" name="text" rows="4" 
+                                    placeholder="Enter text to translate..." required></textarea>
+                            <div class="form-text">
+                                <span id="charCount">0</span> characters
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <!-- Loading Indicator -->
+                    <div class="text-center loading" id="loadingIndicator">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Translating...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Translating your text...</p>
+                    </div>
+                    
+                    <!-- Translation Result -->
+                    <div id="translationResult" class="mt-4" style="display: none;">
+                        <div class="card result-card">
+                            <div class="card-body">
+                                <h6 class="card-title mb-3">
+                                    <i class="fas fa-check-circle text-success me-2"></i>Translation Result
+                                </h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold text-muted">Original Text</label>
+                                            <div class="p-3 bg-light rounded" id="originalText"></div>
+                                            <small class="text-muted" id="sourceInfo"></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold text-muted">Translated Text</label>
+                                            <div class="p-3 bg-light rounded" id="translatedText"></div>
+                                            <small class="text-muted" id="targetInfo"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted" id="translationMessage"></small>
+                                    <button class="btn btn-sm btn-outline-primary" id="copyBtn">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3 class="text-center mb-4">Why Choose Our Translator?</h3>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h5 class="card-title">Lightning Fast</h5>
+                    <p class="card-text">Get instant translations with our optimized AI engine. No waiting, just results.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h5 class="card-title">20+ Languages</h5>
+                    <p class="card-text">Support for major world languages including English, Spanish, Chinese, Arabic, and more.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h5 class="card-title">AI-Powered</h5>
+                    <p class="card-text">Advanced machine learning algorithms ensure accurate and natural translations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Telegram Bot Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <div class="card-body text-center p-5">
+                    <h3 class="mb-3">
+                        <i class="fab fa-telegram me-2"></i>
+                        Also Available on Telegram!
+                    </h3>
+                    <p class="lead mb-4">
+                        Get instant translations directly in your Telegram chats. Perfect for multilingual conversations.
+                    </p>
+                    <a href="{{ url_for('telegram_info') }}" class="btn btn-light btn-lg">
+                        <i class="fab fa-telegram me-2"></i>Try Telegram Bot
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Character counter
+    $('#inputText').on('input', function() {
+        $('#charCount').text($(this).val().length);
+    });
+    
+    // Swap languages
+    $('#swapBtn').click(function() {
+        const sourceLang = $('#sourceLang').val();
+        const targetLang = $('#targetLang').val();
+        $('#sourceLang').val(targetLang);
+        $('#targetLang').val(sourceLang);
+    });
+    
+    // Detect language
+    $('#detectBtn').click(function() {
+        const text = $('#inputText').val().trim();
+        if (!text) {
+            alert('Please enter some text to detect the language.');
+            return;
+        }
+        
+        detectLanguage(text);
+    });
+    
+    // Translation form submission
+    $('#translationForm').submit(function(e) {
+        e.preventDefault();
+        const text = $('#inputText').val().trim();
+        const sourceLang = $('#sourceLang').val();
+        const targetLang = $('#targetLang').val();
+        
+        if (!text) {
+            alert('Please enter some text to translate.');
+            return;
+        }
+        
+        translateText(text, sourceLang, targetLang);
+    });
+    
+    // Copy button
+    $(document).on('click', '#copyBtn', function() {
+        const translatedText = $('#translatedText').text();
+        navigator.clipboard.writeText(translatedText).then(function() {
+            $(this).html('<i class="fas fa-check me-1"></i>Copied!');
+            setTimeout(() => {
+                $(this).html('<i class="fas fa-copy me-1"></i>Copy');
+            }, 2000);
+        }.bind(this));
+    });
+    
+    function detectLanguage(text) {
+        showLoading();
+        
+        $.ajax({
+            url: '/api/detect',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ text: text }),
+            success: function(response) {
+                hideLoading();
+                if (response.success) {
+                    $('#sourceLang').val(response.language_code);
+                    alert(`Detected language: ${response.language_name} (${response.language_code.toUpperCase()})`);
+                } else {
+                    alert('Error: ' + response.error);
+                }
+            },
+            error: function() {
+                hideLoading();
+                alert('Error detecting language. Please try again.');
+            }
+        });
+    }
+    
+    function translateText(text, sourceLang, targetLang) {
+        showLoading();
+        
+        $.ajax({
+            url: '/api/translate',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                text: text,
+                source_lang: sourceLang,
+                target_lang: targetLang
+            }),
+            success: function(response) {
+                hideLoading();
+                if (response.success) {
+                    showTranslationResult(response);
+                } else {
+                    alert('Error: ' + response.error);
+                }
+            },
+            error: function() {
+                hideLoading();
+                alert('Error translating text. Please try again.');
+            }
+        });
+    }
+    
+    function showTranslationResult(response) {
+        $('#originalText').text(response.translated_text === response.original_text ? 
+            $('#inputText').val() : response.original_text || $('#inputText').val());
+        $('#translatedText').text(response.translated_text);
+        $('#sourceInfo').text(`Source: ${response.source_name} (${response.source_language.toUpperCase()})`);
+        $('#targetInfo').text(`Target: ${response.target_name} (${response.target_language.toUpperCase()})`);
+        $('#translationMessage').text(response.message);
+        $('#translationResult').show();
+        
+        // Scroll to result
+        $('html, body').animate({
+            scrollTop: $('#translationResult').offset().top - 100
+        }, 500);
+    }
+    
+    function showLoading() {
+        $('#loadingIndicator').addClass('show');
+        $('#translationResult').hide();
+    }
+    
+    function hideLoading() {
+        $('#loadingIndicator').removeClass('show');
+    }
+});
+</script>
+{% endblock %}

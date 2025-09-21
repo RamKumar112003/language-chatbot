@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+
+{% block title %}About - Language Agnostic Translator{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold mb-3">
+            <i class="fas fa-info-circle text-primary me-3"></i>
+            About Our Translator
+        </h1>
+        <p class="lead text-muted mb-4">
+            Breaking language barriers with AI-powered translation technology
+        </p>
+    </div>
+
+    <!-- Mission Statement -->
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-body p-5 text-center">
+                    <h2 class="mb-4">Our Mission</h2>
+                    <p class="lead">
+                        To make communication seamless across all languages by providing fast, accurate, 
+                        and accessible translation services through both web and Telegram platforms.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="text-center mb-4">Key Features</h3>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h5 class="card-title">AI-Powered</h5>
+                    <p class="card-text">Advanced machine learning algorithms ensure accurate and natural translations that understand context and nuance.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h5 class="card-title">Lightning Fast</h5>
+                    <p class="card-text">Get instant translations with our optimized engine. No waiting, just immediate results for your communication needs.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h5 class="card-title">Privacy Focused</h5>
+                    <p class="card-text">Your data is secure. We don't store your translations, ensuring your conversations remain private.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technology Stack -->
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">
+                        <i class="fas fa-code me-2"></i>Technology Stack
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="fw-semibold mb-3">Backend</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fab fa-python text-primary me-2"></i>
+                                    <strong>Python 3.10+</strong> - Core programming language
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-server text-success me-2"></i>
+                                    <strong>Flask</strong> - Web framework
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fab fa-telegram text-info me-2"></i>
+                                    <strong>python-telegram-bot</strong> - Telegram integration
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-language text-warning me-2"></i>
+                                    <strong>deep-translator</strong> - Translation engine
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="fw-semibold mb-3">Frontend</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fab fa-html5 text-danger me-2"></i>
+                                    <strong>HTML5</strong> - Markup language
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fab fa-css3-alt text-primary me-2"></i>
+                                    <strong>CSS3</strong> - Styling and animations
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fab fa-js-square text-warning me-2"></i>
+                                    <strong>JavaScript</strong> - Interactive features
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fab fa-bootstrap text-purple me-2"></i>
+                                    <strong>Bootstrap 5</strong> - Responsive framework
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supported Languages -->
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">
+                        <i class="fas fa-globe me-2"></i>Language Support
+                    </h3>
+                    <p class="mb-4">
+                        We support over 20 major world languages, covering more than 80% of the global population. 
+                        Our translation engine is continuously updated to provide the most accurate results.
+                    </p>
+                    <div class="row">
+                        {% for code, name in languages.items() %}
+                        <div class="col-md-3 col-sm-4 col-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-primary me-2">{{ code.upper() }}</span>
+                                <span class="small">{{ name }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="text-center mb-4">Perfect For</h3>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h6 class="card-title">Multilingual Teams</h6>
+                    <p class="card-text small">Facilitate communication in international teams and remote work environments.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h6 class="card-title">Language Learning</h6>
+                    <p class="card-text small">Help students understand foreign texts and improve their language skills.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h6 class="card-title">Business Communication</h6>
+                    <p class="card-text small">Break language barriers in international business and customer support.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h6 class="card-title">Social Media</h6>
+                    <p class="card-text small">Engage with global audiences on social platforms and messaging apps.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <div class="card-body p-5">
+                    <h3 class="text-center mb-4">Our Impact</h3>
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-3">
+                            <h2 class="display-4 fw-bold">20+</h2>
+                            <p class="mb-0">Languages Supported</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h2 class="display-4 fw-bold">99%</h2>
+                            <p class="mb-0">Accuracy Rate</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h2 class="display-4 fw-bold">&lt;1s</h2>
+                            <p class="mb-0">Response Time</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h2 class="display-4 fw-bold">24/7</h2>
+                            <p class="mb-0">Availability</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-body p-4 text-center">
+                    <h3 class="card-title mb-4">
+                        <i class="fas fa-envelope me-2"></i>Get in Touch
+                    </h3>
+                    <p class="lead mb-4">
+                        Have questions, suggestions, or need help? We'd love to hear from you!
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <a href="{{ url_for('telegram_info') }}" class="btn btn-primary btn-lg w-100">
+                                <i class="fab fa-telegram me-2"></i>Telegram Bot
+                            </a>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <a href="{{ url_for('index') }}" class="btn btn-outline-primary btn-lg w-100">
+                                <i class="fas fa-globe me-2"></i>Web Translator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

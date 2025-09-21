@@ -1,0 +1,67 @@
+# 🚀 QUICK START GUIDE
+
+## How to Run Your Language Agnostic Translator
+
+### Option 1: Double-Click Batch Files (Easiest)
+- `run_telegram_bot.bat` - Run Telegram bot
+- `run_web_app.bat` - Run web application
+- `run_bot_selector.bat` - Choose what to run
+
+### Option 2: VS Code
+1. Press F5
+2. Select what you want to run:
+   - "Run Private Chat Bot"
+   - "Run Web Application"
+   - "Run Bot Selector"
+
+### Option 3: Command Line
+```bash
+# Telegram Bot
+python run_telegram_bot.py
+
+# Web Application
+python run_web.py
+
+# Bot Selector
+python run_bot.py
+```
+
+## Setup Steps
+
+### 1. Get Bot Token
+1. Go to Telegram
+2. Search for @BotFather
+3. Send /newbot
+4. Follow instructions
+5. Copy the bot token
+
+### 2. Configure Bot
+1. Open .env file
+2. Replace `your_bot_token_here` with your actual token
+3. Save the file
+
+### 3. Run Your Bot
+- Double-click `run_telegram_bot.bat` for Telegram bot
+- Double-click `run_web_app.bat` for web app
+- Open http://localhost:5000 in your browser
+
+## Features Available
+
+### Web Application
+- Real-time translation
+- Language detection
+- Beautiful responsive UI
+- Works on all devices
+
+### Telegram Bot
+- Private chat translation
+- Channel integration
+- Auto language detection
+- 20+ languages supported
+
+## Need Help?
+- Check README.md for detailed instructions
+- Check DEPLOYMENT_GUIDE.md for web deployment
+- All files are ready to use!
+
+Happy translating! 🌍🤖
